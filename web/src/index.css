@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --glow: rgba(255, 195, 26, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+.chest {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* chest */
+
+.hexagon {
+  z-index: -2;
+  position: relative;
+  width: 160px;
+  height: 92.38px;
+  background-color: var(--glow);
+  margin: 46.19px 0;
+  filter: blur(20px);
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+}
+
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: 46.19px solid var(--glow);
+}
+
+.hexagon:after {
+  top: 100%;
+  width: 0;
+  border-top: 46.19px solid var(--glow);
+}
+
+.back {
+  background-image: url("https://res.cloudinary.com/dbrwtwlwl/image/upload/v1580369339/cube/mysteryBoxBackground_2x_b2espr.png");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+.top {
+  background-image: url("https://res.cloudinary.com/dbrwtwlwl/image/upload/v1580369339/cube/mysteryBoxTopFlap_2x_f9cb8g.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.left {
+  background-image: url("https://res.cloudinary.com/dbrwtwlwl/image/upload/v1580369339/cube/mysteryBoxLeftFlap_2x_y8u4gz.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.right {
+  background-image: url("https://res.cloudinary.com/dbrwtwlwl/image/upload/v1580369339/cube/mysteryBoxRightFlap_2x_abexhh.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+#cube {
+  animation: hover 1.5s ease-in-out infinite alternate;
+  transition: transform 300ms;
+  animation-play-state: running;
+}
+
+@keyframes hover {
+  from {
+    transform: translateY(-0.5rem);
+  }
+  to {
+    transform: translateY(0.5rem);
+  }
+}
+
+.powerup {
+  /* background-image: url(""); adicionar imagem aqui */
+  background-size: cover;
+  border-radius: 50%;
+  z-index: 100;
+  overflow: hidden;
+  height: 48px;
+  width: 48px;
+  z-index: -5;
+}

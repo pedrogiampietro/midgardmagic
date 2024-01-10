@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+  seed     = "node prisma/seeds.ts"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int     @id @default(autoincrement())
+  email           String  @unique
+  name            String?
+  password        String
+  experience      Int     @default(0)
+  level           Int     @default(1)
+  mana            Int     @default(0)
+  ranking         Int     @default(0)
+  stamina         Int?    @default(20)
+  firstDeckBox    Boolean @default(false)
+  avatarUrl       String?
+  avatarBorderUrl String?
+  decks           Deck[]
+}
+
+model Card {
+  id                 Int     @id @default(autoincrement())
+  name               String
+  type               String
+  attack             Int
+  defense            Int
+  specialAbility     String
+  rarity             String
+  image              String?
+  description        String?
+  manaCost           Int
+  expansionSet       String
+  decks              Deck[]  @relation("DeckToCard")
+  physicalDamage     Int     @default(0)
+  physicalProtection Int     @default(0)
+  energyDamage       Int     @default(0)
+  energyProtection   Int     @default(0)
+  earthDamage        Int     @default(0)
+  earthProtection    Int     @default(0)
+  fireDamage         Int     @default(0)
+  fireProtection     Int     @default(0)
+  iceDamage          Int     @default(0)
+  iceProtection      Int     @default(0)
+  holyDamage         Int     @default(0)
+  holyProtection     Int     @default(0)
+  deathDamage        Int     @default(0)
+  deathProtection    Int     @default(0)
+}
+
+model Deck {
+  id     Int    @id @default(autoincrement())
+  name   String
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int
+  cards  Card[] @relation("DeckToCard")
+}
